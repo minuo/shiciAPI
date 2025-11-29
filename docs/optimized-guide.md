@@ -11,6 +11,7 @@
 - [实用开发技巧](#实用开发技巧)
 - [测试示例](#测试示例)
 - [注意事项](#注意事项)
+- [GitHub仓库管理指南](#github仓库管理指南)
 
 ## 🛠️ 技术栈概述
 
@@ -859,3 +860,176 @@ const testCase = {
 2. **认证失败**：确认token格式正确且未过期
 3. **500错误**：查看控制台错误堆栈信息
 4. **性能问题**：检查是否使用了合适的索引
+
+## 🌐 GitHub仓库管理指南
+
+### 创建GitHub仓库
+
+1. **登录GitHub账号**
+   - 打开浏览器，访问 [GitHub官网](https://github.com)
+   - 使用您的GitHub账号和密码登录
+
+2. **创建新仓库**
+   - 登录成功后，点击右上角的「+」号图标
+   - 从下拉菜单中选择「New repository」
+
+3. **设置仓库信息**
+   - **Repository name**：输入仓库名称，建议使用 `shiciAPI`
+   - **Description**：（可选）输入仓库描述，例如「诗词API后端服务」
+   - **Visibility**：选择仓库可见性（Public或Private）
+   - **Initialize this repository with**：请不要勾选任何选项，因为我们已经在本地初始化了Git仓库
+   - 点击底部的「Create repository」按钮
+
+4. **获取仓库URL**
+   - 创建成功后，点击「Code」按钮
+   - 复制显示的URL，例如 `https://github.com/your-username/shiciAPI.git`
+
+### 获取远程仓库URL
+
+GitHub仓库URL有两种主要格式：
+
+#### HTTPS格式
+```
+https://github.com/用户名/仓库名.git
+```
+
+**优点**：
+- 不需要配置SSH密钥
+- 通常在防火墙环境中更兼容
+
+**缺点**：
+- 每次推送可能需要输入GitHub用户名和密码（除非配置了凭证助手）
+
+#### SSH格式
+```
+git@github.com:用户名/仓库名.git
+```
+
+**优点**：
+- 使用SSH密钥认证，不需要每次输入密码
+- 更安全
+
+**缺点**：
+- 需要配置SSH密钥
+
+### 配置远程仓库地址
+
+要将本地项目与GitHub远程仓库关联，使用以下命令：
+
+```bash
+# 添加远程仓库
+# 使用HTTPS
+git remote add origin https://github.com/用户名/仓库名.git
+
+# 或使用SSH
+git remote add origin git@github.com:用户名/仓库名.git
+```
+
+如果远程仓库已存在，可以：
+- 使用不同的远程名称
+- 移除现有远程仓库：`git remote remove origin`
+- 更新现有远程仓库URL：`git remote set-url origin 新URL`
+
+### 验证远程仓库配置
+
+1. **查看远程仓库列表**
+   ```bash
+   git remote -v
+   ```
+
+2. **查看远程仓库详细信息**
+   ```bash
+   git remote show origin
+   ```
+
+3. **测试连接**
+   - 对于HTTPS URL：`git ls-remote`
+   - 对于SSH URL：`ssh -T git@github.com`
+
+4. **常见问题排查**
+   - **远程仓库不存在**：检查URL拼写和访问权限
+   - **SSH连接失败**：检查SSH密钥配置
+   - **远程名称重复**：使用不同名称或移除现有远程仓库
+
+### 推送代码到远程仓库
+
+#### 推送前准备
+- ✅ 已经配置了远程仓库（使用 `git remote add origin URL`）
+- ✅ 本地有已提交的代码（使用 `git commit`）
+- ✅ 远程仓库已创建且可访问
+
+#### 首次推送
+```bash
+# 将main分支推送到origin远程仓库，并设置跟踪关系
+git push -u origin main
+```
+
+#### 后续推送
+设置了上游分支后，后续推送可以简化为：
+```bash
+git push
+```
+
+#### 强制推送（谨慎使用）
+```bash
+# 强制推送
+git push --force origin main
+
+# 安全强制推送（推荐）
+git push --force-with-lease origin main
+```
+
+#### 推送所有分支和标签
+```bash
+# 推送所有分支
+git push --all origin
+
+# 推送所有标签
+git push --tags origin
+```
+
+#### 常见问题排查
+1. **权限问题**：确保输入了正确的GitHub用户名和密码/个人访问令牌
+2. **分支保护规则**：查看并遵守仓库的分支保护规则
+3. **冲突问题**：先拉取远程分支：`git pull origin main --allow-unrelated-histories`
+
+#### 最佳实践
+- **定期推送**：养成定期推送代码的习惯
+- **小批量提交**：将大的更改分成多个小的、有意义的提交
+- **写清晰的提交信息**：提交信息应该清晰描述更改内容
+- **推送前先拉取**：推送前先执行 `git pull` 确保本地代码是最新的
+
+### 验证GitHub代码上传
+
+#### 方法一：通过GitHub网页验证
+1. 打开浏览器，访问您的GitHub仓库页面
+2. 检查以下内容是否正确显示：
+   - 所有项目文件和目录是否都已上传
+   - 最近的提交信息是否正确
+   - 分支是否显示为`main`
+
+#### 方法二：通过Git命令验证
+```bash
+# 查看远程仓库信息
+git remote -v
+
+# 查看本地分支与远程分支的关联状态
+git branch -vv
+
+# 拉取最新代码，验证双向通信
+git pull origin main
+```
+
+#### 验证成功的标志
+- GitHub页面上显示完整的项目文件结构
+- 包含所有关键文件：`.gitignore`、`app.js`、控制器、模型等
+- 部署相关文件：`.github/workflows/deploy.yml`、`deploy.sh`等
+- 没有敏感文件被上传（如`.env`）
+
+#### 后续步骤
+验证成功后，您可以：
+1. 在GitHub上配置仓库的Secrets以启用自动化部署
+2. 设置仓库的Description和Topics以提高可发现性
+3. 启用GitHub Pages（如果需要文档网站）
+4. 设置Issue模板和Pull Request模板
+5. 邀请协作者（如果需要多人开发）
