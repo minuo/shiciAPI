@@ -153,7 +153,16 @@ npm run test:endpoint
 
 ## 部署
 
-项目支持通过 GitHub Actions 进行自动部署。详细的部署指南可参考项目中的 `DEPLOYMENT_GUIDE.md` 文件。
+项目支持通过 GitHub Actions 进行自动部署。详细的部署指南可参考 `docs/guides/DEPLOYMENT_GUIDE.md` 文件。
+
+## 文档目录
+
+项目文档已集中存放在 `docs` 目录下，包括：
+
+- **指南文档**：`docs/guides/` - 包含部署指南、SSH设置等
+- **宝塔部署**：`docs/baota/` - 宝塔面板部署相关文档
+- **测试报告**：`docs/testing/` - API测试报告
+- **配置指南**：`docs/configs/` - 配置优化和提示文档
 
 ## 许可证
 
