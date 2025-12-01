@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 const poemSchema = new mongoose.Schema({
   title: { type: String, required: true },
-  author: { type: String, required: true, index: true },
+  author: { type: String, required: true, index: true }, // 保留字符串作者名，方便查询
+  authorId: { type: mongoose.Schema.Types.ObjectId, ref: 'Author', index: true }, // 添加作者引用
   dynasty: { type: String, required: true, index: true },
   content: { type: [String], required: true },
   annotation: { type: [String] },
@@ -10,7 +11,9 @@ const poemSchema = new mongoose.Schema({
   appreciation: String,
   // 将字符串数组改为引用Tag模型的ObjectId数组
   tags: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Tag', index: true }],
+  originalTags: { type: [String] }, // 保留原始标签字符串，方便数据迁移
   likeCount: { type: Number, default: 0 },
+  originalId: { type: String }, // 原始数据ID，用于追踪
   createTime: { type: Date, default: Date.now },
   updateTime: { type: Date, default: Date.now }
 });

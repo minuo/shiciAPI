@@ -1,0 +1,186 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-sans text-dark bg-white min-h-screen;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif font-bold;
+  }
+  a {
+    @apply text-primary hover:text-primary/80 transition-colors;
+  }
+  p {
+    @apply leading-relaxed;
+  }
+  /* 响应式字体大小 */
+  :root {
+    --font-size-base: clamp(1rem, 2vw, 1.125rem);
+    --font-size-lg: clamp(1.25rem, 3vw, 1.5rem);
+    --font-size-xl: clamp(1.5rem, 4vw, 2rem);
+    --font-size-2xl: clamp(2rem, 5vw, 3rem);
+  }
+  html {
+    @apply scroll-smooth;
+  }
+}
+
+@layer components {
+  .container {
+    @apply max-w-6xl mx-auto px-4;
+  }
+  .btn {
+    @apply px-4 py-2 rounded-lg transition-all duration-200 font-medium focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary/90 focus:ring-primary/50;
+  }
+  .btn-secondary {
+    @apply bg-secondary text-white hover:bg-secondary/90 focus:ring-secondary/50;
+  }
+  .btn-outline {
+    @apply border border-primary text-primary hover:bg-primary/10 focus:ring-primary/50;
+  }
+  .btn-sm {
+    @apply px-3 py-1 text-sm;
+  }
+  .btn-lg {
+    @apply px-6 py-3 text-lg;
+  }
+  .card {
+    @apply bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg;
+  }
+  .card-hover {
+    @apply hover:translate-y-[-2px];
+  }
+  .input {
+    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all;
+  }
+  .input-error {
+    @apply border-danger focus:ring-danger/50 focus:border-danger;
+  }
+  .badge {
+    @apply px-2 py-1 text-xs font-medium rounded-full;
+  }
+  .badge-primary {
+    @apply bg-primary/10 text-primary;
+  }
+  .badge-secondary {
+    @apply bg-secondary/10 text-secondary;
+  }
+  .badge-success {
+    @apply bg-success/10 text-success;
+  }
+  .badge-danger {
+    @apply bg-danger/10 text-danger;
+  }
+  /* 响应式网格 */
+  .grid-responsive {
+    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4;
+  }
+  .grid-poems {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-6;
+  }
+  /* 布局组件 */
+  .page-header {
+    @apply mb-8;
+  }
+  .page-title {
+    @apply text-2xl md:text-3xl font-serif font-bold mb-2;
+  }
+  .section-title {
+    @apply text-xl md:text-2xl font-serif font-bold mb-4;
+  }
+  /* 诗词样式 */
+  .poem-line {
+    @apply mb-2 leading-relaxed font-serif;
+  }
+  .poem-title {
+    @apply text-xl font-serif font-bold mb-2;
+  }
+  .poem-author {
+    @apply text-gray-600 mb-4;
+  }
+  /* 表单组件 */
+  .form-group {
+    @apply mb-4;
+  }
+  .form-label {
+    @apply block text-sm font-medium text-gray-700 mb-1;
+  }
+  .form-error {
+    @apply text-danger text-sm mt-1;
+  }
+  /* 加载状态 */
+  .skeleton {
+    @apply animate-pulse bg-gray-200 rounded;
+  }
+  /* 动画 */
+  .fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  .slide-up {
+    animation: slideUp 0.5s ease-out;
+  }
+}
+
+/* 全局样式 */
+#app {
+  @apply min-h-screen flex flex-col;
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  @apply w-2 h-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-light;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-secondary rounded-full hover:bg-secondary/80;
+}
+
+/* 动画定义 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* 响应式断点优化 */
+@media (max-width: 640px) {
+  .container {
+    @apply px-3;
+  }
+  h1 {
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+}
+
+/* 深色模式基础样式（预留） */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}

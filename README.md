@@ -29,32 +29,26 @@
 
 ```
 shiciAPI/
-├── config/           # 配置文件目录
-│   └── db.js         # 数据库连接配置
-├── controllers/      # 控制器目录
-│   ├── auth.js       # 认证控制器
-│   ├── comment.js    # 评论控制器
-│   ├── poem.js       # 诗词控制器
-│   └── tag.js        # 标签控制器
-├── middleware/       # 中间件目录
-│   ├── auth.js       # 认证中间件
-│   ├── error.js      # 错误处理中间件
-│   └── validate.js   # 数据验证中间件
-├── models/           # 数据模型目录
-│   ├── Comment.js    # 评论模型
-│   ├── Poem.js       # 诗词模型
-│   ├── Tag.js        # 标签模型
-│   └── User.js       # 用户模型
-├── routes/           # 路由目录
-│   └── index.js      # 路由配置
-├── utils/            # 工具函数目录
-├── tests/            # 测试文件目录
-├── app.js            # 应用程序主文件
-├── server.js         # 服务器入口文件
-├── seed.js           # 数据初始化脚本
-├── package.json      # 项目配置和依赖
-└── .env              # 环境变量配置（需自行创建）
+├── Server/           # 后端代码目录
+│   ├── config/       # 配置文件目录
+│   ├── controllers/  # 控制器目录
+│   ├── middleware/   # 中间件目录
+│   ├── models/       # 数据模型目录
+│   ├── routes/       # 路由目录
+│   ├── utils/        # 工具函数目录
+│   ├── tests/        # 测试文件目录
+│   ├── migrations/   # 数据库迁移目录
+│   ├── app.js        # 应用程序主文件
+│   ├── server.js     # 服务器入口文件
+│   ├── seed.js       # 数据初始化脚本
+│   ├── package.json  # 项目配置和依赖
+│   └── .env          # 环境变量配置（需自行创建）
+├── docs/             # 项目文档目录
+└── README.md         # 项目说明文档
 ```
+
+### 后端目录说明
+所有后端相关代码和配置文件已移至 `Server` 目录中，保持了原有的内部结构层级关系。在开发和运行后端服务时，请先进入 Server 目录再执行相应命令。
 
 ## 安装与配置
 
@@ -72,15 +66,16 @@ git clone <repository-url>
 cd shiciAPI
 ```
 
-2. **安装依赖**
+2. **进入后端目录并安装依赖**
 
 ```bash
+cd Server
 npm install
 ```
 
 3. **配置环境变量**
 
-创建 `.env` 文件，添加以下配置：
+在 Server 目录中创建 `.env` 文件，添加以下配置：
 
 ```
 # MongoDB 连接字符串
@@ -95,6 +90,8 @@ PORT=3000
 
 4. **初始化数据**
 
+确保在 Server 目录中执行：
+
 ```bash
 npm run seed
 ```
@@ -105,13 +102,17 @@ npm run seed
 
 ### 启动服务
 
+确保在 Server 目录中执行以下命令：
+
 **开发模式**：
 ```bash
+cd Server
 npm run dev
 ```
 
 **生产模式**：
 ```bash
+cd Server
 npm start
 ```
 
@@ -147,7 +148,10 @@ npm start
 
 ## 测试
 
+确保在 Server 目录中执行：
+
 ```bash
+cd Server
 npm run test:endpoint
 ```
 
@@ -157,12 +161,21 @@ npm run test:endpoint
 
 ## 文档目录
 
-项目文档已集中存放在 `docs` 目录下，包括：
+项目文档已集中存放在 `docs` 目录下，按照文档类型和功能模块进行组织：
 
+### 文档结构与规范
+- **文档结构规范**：`docs/DOCUMENT_STRUCTURE.md` - 详细的文档分类标准和目录结构
+- **文档组织指南**：`docs/DOCUMENTATION_GUIDELINES.md` - 文档存放规则和最佳实践
+
+### 主要文档分类
 - **指南文档**：`docs/guides/` - 包含部署指南、SSH设置等
 - **宝塔部署**：`docs/baota/` - 宝塔面板部署相关文档
 - **测试报告**：`docs/testing/` - API测试报告
 - **配置指南**：`docs/configs/` - 配置优化和提示文档
+- **代码审查**：`docs/code_reviews/` - 代码审查报告和质量分析
+
+### 文档使用说明
+所有新生成的文档文件必须统一存放在 `docs` 目录中，并根据文档类型和功能模块组织到对应的子目录中。请参考 `docs/DOCUMENTATION_GUIDELINES.md` 了解详细的文档存放规范。在提交代码时，请检查文档存放位置是否符合规范，避免文档散落在项目其他目录中。
 
 ## 许可证
 
